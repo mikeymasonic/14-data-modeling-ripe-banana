@@ -22,4 +22,17 @@ describe('studio routes', () => {
         });
       });
   });
+
+  it('gets all studios', async() => {
+    const studios = await getStudios();
+    return request(app)
+      .get('/api/v1/studios')
+      .then(res => {
+        studios.forEach(studio => {
+          delete studio.__v;
+          delete studio.address;
+          expect(res.body).toContainEqual(studio);
+        });
+      });
+  });
 });

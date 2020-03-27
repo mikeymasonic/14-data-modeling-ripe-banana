@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 const seed = require('./seed');
@@ -7,7 +8,6 @@ const Studio = require('../lib/models/Studio');
 const Film = require('../lib/models/Film');
 const Reviewer = require('../lib/models/Reviewer');
 const Review = require('../lib/models/Review');
-
 
 beforeAll(() => {
   connect();

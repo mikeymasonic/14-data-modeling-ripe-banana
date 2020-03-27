@@ -45,6 +45,4 @@ describe('studio routes', () => {
         expect(res.body).toEqual({ ...studio, films: expect.any(Object) });
       });
   });
-
-
 });

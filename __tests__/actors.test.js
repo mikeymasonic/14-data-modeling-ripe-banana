@@ -14,9 +14,9 @@ describe('actor routes', () => {
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
-          __v: 0,
           name: 'Budge Wootie',
-          id: expect.any(String)
+          id: expect.any(String),
+          __v: 0
         });
       });
   });
@@ -47,7 +47,4 @@ describe('actor routes', () => {
         });
       });
   });
-
-
-
 });

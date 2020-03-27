@@ -21,4 +21,15 @@ describe('reviewer routes', () => {
         });
       });
   });
+
+  it('gets all reviewers', async() => {
+    const reviewers = await getReviewers();
+    return request(app)
+      .get('/api/v1/reviewers')
+      .then(res => {
+        reviewers.forEach(reviewer => {
+          expect(res.body).toContainEqual(reviewer);
+        });
+      });
+  });
 });

@@ -29,4 +29,21 @@ describe('review routes', () => {
         });
       });
   });
+
+  it('gets 100 reviews if there are more than 100', async() => {
+    const reviewer = await getReviewer();
+    const film = await getFilm();
+
+    await Review.create([...Array(150)].map(() => ({
+      rating: 5,
+      reviewer: reviewer._id,
+      review: chance.string({ length: 140 }),
+      film: film._id
+    })));
+    return request(app)
+      .get('/api/v1/reviews')
+      .then(res => {
+        expect(res.body).toHaveLength(100);
+      });
+  });
 });

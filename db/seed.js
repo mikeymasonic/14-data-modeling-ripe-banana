@@ -6,13 +6,13 @@ const Actor = require('../lib/models/Actor');
 const Reviewer = require('../lib/models/Reviewer');
 const Review = require('../lib/models/Review');
 
-module.exports = async({ studiosNum = 30, filmsNum = 150, actorsNum = 200, reviewersNum = 50, reviewsNum = 200 } = {}) => {
+module.exports = async({ studiosNum = 2, filmsNum = 2, actorsNum = 2, reviewersNum = 2, reviewsNum = 2 } = {}) => {
   const actors = await Actor.create([...Array(actorsNum)].map(() => ({
     name: chance.name()
   })));
 
   const studios = await Studio.create([...Array(studiosNum)].map(() => ({
-    name: chance.name(),
+    name: chance.prefix() + ' ' + chance.animal() + ' Studios',
     address: {
       city: chance.city(),
       state: chance.state(),
@@ -22,11 +22,11 @@ module.exports = async({ studiosNum = 30, filmsNum = 150, actorsNum = 200, revie
 
   const reviewers = await Reviewer.create([...Array(reviewersNum)].map(() => ({
     name: chance.name(),
-    company: chance.name()
+    company: chance.animal() + ' ' + chance.last()
   })));
 
   const films = await Film.create([...Array(filmsNum)].map(() => ({
-    title: chance.name(),
+    title: chance.first() + ' the ' + chance.animal() + ': ' + chance.profession(),
     studio: chance.pickone(studios.map(studio => studio._id)),
     released: chance.integer({ min: 1888, max: 3000 }),
     cast: [{ role: chance.word(), actor: chance.pickone(actors.map(actor => actor._id)) }]

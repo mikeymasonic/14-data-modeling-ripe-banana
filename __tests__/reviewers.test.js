@@ -41,4 +41,20 @@ describe('reviewer routes', () => {
         expect(res.body).toEqual({ ...reviewer, reviews: expect.any(Object) });
       });
   });
+
+  it('updates a reviewer by id', async() => {
+    const reviewer = await getReviewer();
+    return request(app)
+      .patch(`/api/v1/reviewers/${reviewer._id}`)
+      .send({ name: 'Bob Reviewman' })
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: expect.any(String),
+          name: 'Bob Reviewman',
+          company: reviewer.company,
+          // id: expect.any(String),
+          __v: 0
+        });
+      });
+  });
 });

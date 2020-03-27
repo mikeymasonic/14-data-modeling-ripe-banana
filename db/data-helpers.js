@@ -6,6 +6,7 @@ const Actor = require('../lib/models/Actor');
 const Studio = require('../lib/models/Studio');
 const Film = require('../lib/models/Film');
 const Reviewer = require('../lib/models/Reviewer');
+const Review = require('../lib/models/Review');
 
 
 beforeAll(() => {
@@ -39,5 +40,6 @@ module.exports = {
   ...createGetters(Actor),
   ...createGetters(Film),
   ...createGetters(Studio),
-  ...createGetters(Reviewer)
+  ...createGetters(Reviewer),
+  ...createGetters(Review)
 };

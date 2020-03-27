@@ -29,4 +29,16 @@ describe('film routes', () => {
         });
       });
   });
+
+  it('gets all films', async() => {
+    const films = await getFilms();
+    return request(app)
+      .get('/api/v1/films')
+      .then(res => {
+        films.forEach(film => {
+          delete film.cast;
+          expect(res.body).toContainEqual({ ...film, studio: expect.any(Object) });
+        });
+      });
+  });
 });

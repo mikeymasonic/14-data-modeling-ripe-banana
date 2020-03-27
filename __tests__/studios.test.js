@@ -18,6 +18,7 @@ describe('studio routes', () => {
           _id: expect.any(String),
           name: 'Whatever Studios',
           address: { city: 'Portland', state: 'OR', country: 'United States' },
+          id: expect.any(String),
           __v: 0
         });
       });

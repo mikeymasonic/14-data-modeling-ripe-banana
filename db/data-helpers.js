@@ -1,7 +1,10 @@
 require('dotenv').config();
 const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
+const seed = require('./seed');
+const Actor = require('../lib/models/Actor');
 const Studio = require('../lib/models/Studio');
+const Film = require('../lib/models/Film');
 
 
 beforeAll(() => {
@@ -10,6 +13,10 @@ beforeAll(() => {
 
 beforeEach(() => {
   return mongoose.connection.dropDatabase();
+});
+
+beforeEach(() => {
+  return seed({});
 });
 
 afterAll(() => {
@@ -28,5 +35,7 @@ const createGetters = Model => {
 };
 
 module.exports = {
+  ...createGetters(Actor),
+  ...createGetters(Film),
   ...createGetters(Studio)
 };

@@ -57,4 +57,18 @@ describe('reviewer routes', () => {
         });
       });
   });
+
+  it('deletes a reviewer by id if reviewer has no reviews', async() => {
+    const reviewer = await getReviewer();
+    await Review.deleteMany({ reviewer: reviewer._id });
+    return request(app)
+      .delete(`/api/v1/reviewers/${reviewer._id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: expect.any(String),
+          name: reviewer.name,
+          company: reviewer.company
+        });
+      });
+  });
 });
